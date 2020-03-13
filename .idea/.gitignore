@@ -43,3 +43,8 @@ crashlytics.properties
 crashlytics-build.properties
 
 # Created by .ignore support plugin (hsz.mobi)
+/encodings.xml
+/../target/classes/org/example/pics/icon.png
+/misc.xml
+/../target/classes/org/example/utils/MyStrings.class
+/vcs.xml
