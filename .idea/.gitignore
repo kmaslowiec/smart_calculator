@@ -53,3 +53,5 @@ crashlytics-build.properties
 
 # Datasource local storage ignored files
 /dataSources.local.xml
+HackTheBeer.iml
+users.sqlite

@@ -10,7 +10,7 @@ import org.example.App;
 
 import java.io.IOException;
 
-public class PrimaryController {
+public class CalculatorController {
 
     @FXML
     Label calLabel;
