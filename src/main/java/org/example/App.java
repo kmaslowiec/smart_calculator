@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 import org.example.utils.MyStrings;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 /**
  * JavaFX App
@@ -18,15 +17,6 @@ public class App extends Application {
 
     private static final Image ICON = new Image(App.class.getResourceAsStream(MyStrings.ICON_IMG));
     private static Scene scene;
-    private static HashMap<String, Integer> map = new HashMap<>();
-
-    public HashMap<String, Integer> getMap() {
-        return map;
-    }
-
-    public void setMap(HashMap<String, Integer> map) {
-        App.map = map;
-    }
 
     public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
@@ -34,7 +24,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 500, 600);
+        scene = new Scene(loadFXML("calculator"), 500, 600);
         stage.setTitle("Smart Calculator");
         scene.getStylesheets().add
                 (App.class.getResource("app.css").toExternalForm());

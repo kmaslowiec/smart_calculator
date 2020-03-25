@@ -2,18 +2,24 @@ package org.example.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import org.example.App;
+import org.example.service.CalculatorService;
+import org.example.service.impl.CalculatorServiceImpl;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class CalculatorController {
+public class CalculatorController implements Initializable {
 
     @FXML
-    Label calLabel;
+    public Button logOutButton;
+    CalculatorService calculator = new CalculatorServiceImpl();
+    String input;
     @FXML
     TextField resultField;
     @FXML
@@ -49,16 +55,17 @@ public class CalculatorController {
     @FXML
     Button send;
 
-
-    public void initialize() throws IOException {
-        //calLogic = new CalLogic();
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        logOutButton.setVisible(false);
     }
 
     @FXML
     private void cal() {
-        String input = resultField.getText();
-        //String res = calLogic.logic(input);
-        //resultField.setText(res);
+        input = resultField.getText();
+        if (!input.isEmpty()) {
+            resultField.setText(calculator.calculate(input));
+        }
     }
 
     @FXML
@@ -95,13 +102,17 @@ public class CalculatorController {
         } else if (event.getSource() == back) {
             if (resultField.getLength() > 0) {
                 String a = resultField.getText().substring(0, resultField.getLength() - 1);
+                int i = resultField.getCaretPosition() - 1;
                 resultField.setText(a);
+                resultField.positionCaret(i);
             }
         } else if (event.getSource() == clear) {
             resultField.setText("");
         } else if (event.getSource() == send) {
-            String input = resultField.getText();
-            //resultField.setText(calLogic.logic(input));
+            input = resultField.getText();
+            if (!input.isEmpty()) {
+                resultField.setText(calculator.calculate(input));
+            }
         }
     }
 }
