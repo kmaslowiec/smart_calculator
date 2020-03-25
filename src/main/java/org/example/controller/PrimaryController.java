@@ -1,4 +1,4 @@
-package org.example;
+package org.example.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import org.example.App;
 
 import java.io.IOException;
 
@@ -47,24 +48,23 @@ public class PrimaryController {
     Button clear;
     @FXML
     Button send;
-    CalLogic calLogic;
 
 
     public void initialize() throws IOException {
-        calLogic = new CalLogic();
+        //calLogic = new CalLogic();
     }
 
     @FXML
     private void cal() {
         String input = resultField.getText();
-        String res = calLogic.logic(input);
-        resultField.setText(res);
+        //String res = calLogic.logic(input);
+        //resultField.setText(res);
     }
 
-    /*@FXML
-    private void switchToSecondary() throws IOException {
-        App.setRoot("secondary");
-    }*/
+    @FXML
+    private void switchToLogin() throws IOException {
+        App.setRoot("login");
+    }
 
     @FXML
     private void handleButtonClick(ActionEvent event) {
@@ -101,7 +101,7 @@ public class PrimaryController {
             resultField.setText("");
         } else if (event.getSource() == send) {
             String input = resultField.getText();
-            resultField.setText(calLogic.logic(input));
+            //resultField.setText(calLogic.logic(input));
         }
     }
 }

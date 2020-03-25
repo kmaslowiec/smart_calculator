@@ -4,32 +4,47 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <BorderPane fx:id="mainPane" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.example.PrimaryController">
-   <padding>
-      <Insets top="15" right="25" bottom="25" left="25"/>
-   </padding>
-   <center>
-      <VBox alignment="TOP_CENTER">
-         <TextField fx:id="resultField" onAction="#cal"/>
-         <GridPane alignment="center" hgap="15" vgap="10">
+            fx:controller="org.example.controller.PrimaryController">
+    <padding>
+        <Insets top="15" right="25" bottom="25" left="25"/>
+    </padding>
+    <top>
+        <Label text="Primary View"/>
+        <Button fx:id="logOutButton" text="log out" onAction="#switchToLogin"/>
+    </top>
+    <center>
+
+        <VBox alignment="TOP_CENTER">
             <padding>
-               <Insets top="25" right="25" bottom="25" left="25"/>
+                <Insets top="15" right="25" bottom="25" left="25"/>
             </padding>
-            <Button fx:id="one" onAction="#handleButtonClick" text="1" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-            <Button fx:id="two" onAction="#handleButtonClick" text="2" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-            <Button fx:id="three" onAction="#handleButtonClick" text="3" GridPane.columnIndex="2"
-                    GridPane.rowIndex="0"/>
-            <Button fx:id="plus" onAction="#handleButtonClick" text="+" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
-            <Button fx:id="four" onAction="#handleButtonClick" text="4" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-            <Button fx:id="five" onAction="#handleButtonClick" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-            <Button fx:id="six" onAction="#handleButtonClick" text="6" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-            <Button fx:id="minus" onAction="#handleButtonClick" text="-" GridPane.columnIndex="3"
-                    GridPane.rowIndex="1"/>
-            <Button fx:id="seven" onAction="#handleButtonClick" text="7" GridPane.columnIndex="0"
-                    GridPane.rowIndex="2"/>
-            <Button fx:id="eight" onAction="#handleButtonClick" text="8" GridPane.columnIndex="1"
-                    GridPane.rowIndex="2"/>
-            <Button fx:id="nine" onAction="#handleButtonClick" text="9" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+            <TextField fx:id="resultField" onAction="#cal"/>
+            <GridPane alignment="center" hgap="15" vgap="10">
+                <padding>
+                    <Insets top="25" right="25" bottom="25" left="25"/>
+                </padding>
+                <Button fx:id="one" onAction="#handleButtonClick" text="1" GridPane.columnIndex="0"
+                        GridPane.rowIndex="0"/>
+                <Button fx:id="two" onAction="#handleButtonClick" text="2" GridPane.columnIndex="1"
+                        GridPane.rowIndex="0"/>
+                <Button fx:id="three" onAction="#handleButtonClick" text="3" GridPane.columnIndex="2"
+                        GridPane.rowIndex="0"/>
+                <Button fx:id="plus" onAction="#handleButtonClick" text="+" GridPane.columnIndex="3"
+                        GridPane.rowIndex="0"/>
+                <Button fx:id="four" onAction="#handleButtonClick" text="4" GridPane.columnIndex="0"
+                        GridPane.rowIndex="1"/>
+                <Button fx:id="five" onAction="#handleButtonClick" text="5" GridPane.columnIndex="1"
+                        GridPane.rowIndex="1"/>
+                <Button fx:id="six" onAction="#handleButtonClick" text="6" GridPane.columnIndex="2"
+                        GridPane.rowIndex="1"/>
+                <Button fx:id="minus" onAction="#handleButtonClick" text="-" GridPane.columnIndex="3"
+                        GridPane.rowIndex="1"/>
+                <Button fx:id="seven" onAction="#handleButtonClick" text="7" GridPane.columnIndex="0"
+                        GridPane.rowIndex="2"/>
+                <Button fx:id="eight" onAction="#handleButtonClick" text="8" GridPane.columnIndex="1"
+                        GridPane.rowIndex="2"/>
+                <Button fx:id="nine" onAction="#handleButtonClick" text="9" GridPane.columnIndex="2"
+                        GridPane.rowIndex="2"/>
             <Button fx:id="equal" onAction="#handleButtonClick" text="=" GridPane.columnIndex="3"
                     GridPane.rowIndex="2"/>
             <Button fx:id="clear" onAction="#handleButtonClick" text="clear" GridPane.columnIndex="0"
@@ -42,11 +57,5 @@
       </VBox>
 
    </center>
-   <!--<children>
-      <Label text="Primary View" />
-      <Button fx:id="primaryButton" text="Switch to Secondary View" onAction="#switchToSecondary"/>
-   </children>
-   <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-   </padding>-->
+
 </BorderPane>
