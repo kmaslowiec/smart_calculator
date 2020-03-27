@@ -14,11 +14,10 @@ import org.example.service.impl.RegistrationServiceImpl;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
 
 public class RegisterController implements Initializable {
 
-    private final static Logger LOGGER = Logger.getLogger(RegisterController.class.getName());
+    //private final static Logger LOGGER = Logger.getLogger(RegisterController.class.getName());
     @FXML
     public TextField emailField;
     @FXML

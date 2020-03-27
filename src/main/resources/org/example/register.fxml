@@ -23,7 +23,7 @@
             <Label text="password"/>
             <TextField fx:id="passField"/>
             <Label text="email"/>
-            <TextField fx:id="emailField"/>
+            <TextField fx:id="emailField" onAction="#register"/>
             <Button fx:id="registerButton" onAction="#register" text="register"/>
             <Label fx:id="successLabel"/>
         </VBox>

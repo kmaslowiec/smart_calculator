@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import java.net.URL?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal"
+<BorderPane fx:id="scene" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal"
             fx:controller="org.example.controller.RegisterController">
     <stylesheets>
         <URL value="@register.css"/>
@@ -23,7 +23,7 @@
             <Label text="password"/>
             <TextField fx:id="passField"/>
             <Label text="email"/>
-            <TextField fx:id="emailField"/>
+            <TextField fx:id="emailField" onAction="#register"/>
             <Button fx:id="registerButton" onAction="#register" text="register"/>
             <Label fx:id="successLabel"/>
         </VBox>

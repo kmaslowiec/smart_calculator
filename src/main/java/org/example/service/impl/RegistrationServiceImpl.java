@@ -23,7 +23,6 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     public boolean create(User user) throws InvalidEntryException {
-
         emailValidation(user.getEmail());
         return dao.create(user);
     }
