@@ -11,4 +11,5 @@ public class MyRegex {
     public static final String HAS_DIGITS = ".*[0-9].*";
     public static final String HAS_MORE_THAN_0NE_ASTRIX = ".*[*]{2,}.*";
     public static final String ONLY_LETTERS = "[a-zA-Z]*";
+    public static final String EMAIL_IS_VALID = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
 }

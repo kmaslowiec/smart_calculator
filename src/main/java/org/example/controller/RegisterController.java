@@ -7,52 +7,67 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import org.example.RegistrationModel;
+import org.example.entity.User;
+import org.example.exception.InvalidEntryException;
+import org.example.service.RegistrationService;
+import org.example.service.impl.RegistrationServiceImpl;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
 public class RegisterController implements Initializable {
 
-    public TextField loginField;
+    private final static Logger LOGGER = Logger.getLogger(RegisterController.class.getName());
     @FXML
-    public VBox form;
+    public TextField emailField;
     @FXML
-    public Button registerButton;
+    private TextField loginField;
     @FXML
-    public Label infoLabel;
+    private VBox form;
     @FXML
-    public Label notRegInfo;
+    private Button registerButton;
     @FXML
-    public TextField passField;
-    private RegistrationModel loginModel = new RegistrationModel();
+    private Label successLabel;
+    @FXML
+    private Label failureLabel;
+    @FXML
+    private TextField passField;
+    private RegistrationService service = new RegistrationServiceImpl();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         form.setSpacing(15.0);
-        infoLabel.setVisible(false);
+        successLabel.setVisible(false);
     }
 
     public void register(ActionEvent actionEvent) {
-        String login = loginField.getText();
-        String password = passField.getText();
-        boolean isRegistered = loginModel.insert(login, password);
-        if (isRegistered) {
-            registered();
-        } else {
-            notRegistered();
+        try {
+            User user = new User();
+            user.setName(loginField.getText());
+            user.setPassword(passField.getText());
+            user.setEmail(emailField.getText());
+            boolean response = service.create(user);
+            if (response) {
+                registered();
+            } else {
+                notRegistered();
+            }
+        } catch (InvalidEntryException e) {
+            failureLabel.setVisible(true);
+            failureLabel.setText(e.getMessage());
         }
     }
 
     private void registered() {
         registerButton.setVisible(false);
-        infoLabel.setText("You've been registered");
-        infoLabel.setVisible(true);
-        notRegInfo.setVisible(false);
+        successLabel.setText("You've been registered");
+        successLabel.setVisible(true);
+        failureLabel.setVisible(false);
     }
 
     private void notRegistered() {
-        notRegInfo.setVisible(true);
-        notRegInfo.setText("User already exists");
+        failureLabel.setVisible(true);
+        failureLabel.setText("User already exists");
     }
 }

@@ -17,13 +17,15 @@
     </padding>
     <center>
         <VBox fx:id="form" alignment="CENTER">
-            <Label fx:id="notRegInfo"/>
+            <Label fx:id="failureLabel"/>
             <Label text="login"/>
             <TextField fx:id="loginField"/>
             <Label text="password"/>
             <TextField fx:id="passField"/>
+            <Label text="email"/>
+            <TextField fx:id="emailField"/>
             <Button fx:id="registerButton" onAction="#register" text="register"/>
-            <Label fx:id="infoLabel"/>
+            <Label fx:id="successLabel"/>
         </VBox>
     </center>
 </BorderPane>
