@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -7,19 +8,24 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import org.example.App;
 import org.example.entity.User;
 import org.example.exception.InvalidEntryException;
 import org.example.service.RegistrationService;
 import org.example.service.impl.RegistrationServiceImpl;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
 public class RegisterController implements Initializable {
 
-    //private final static Logger LOGGER = Logger.getLogger(RegisterController.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(RegisterController.class.getName());
     @FXML
     public TextField emailField;
+    @FXML
+    public TextField repeatPassField;
     @FXML
     private TextField loginField;
     @FXML
@@ -46,27 +52,61 @@ public class RegisterController implements Initializable {
             user.setName(loginField.getText());
             user.setPassword(passField.getText());
             user.setEmail(emailField.getText());
+            fieldsCannotBeEmpty();
+            passwordsDoesNotMatch();
             boolean response = service.create(user);
             if (response) {
                 registered();
             } else {
-                notRegistered();
+                failureMessage("User already exists");
             }
         } catch (InvalidEntryException e) {
-            failureLabel.setVisible(true);
-            failureLabel.setText(e.getMessage());
+            failureMessage(e.getMessage());
+            Task<Void> task = new Task<>() {
+                @Override
+                protected Void call() {
+                    try {
+                        Thread.sleep(2000);
+                        App.setRoot("register");
+                    } catch (InterruptedException | IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    return null;
+                }
+            };
+            new Thread(task).start();
         }
     }
 
     private void registered() {
         registerButton.setVisible(false);
-        successLabel.setText("You've been registered");
+        successLabel.setText("Register successful");
         successLabel.setVisible(true);
         failureLabel.setVisible(false);
+        try {
+            App.setRoot("login");
+        } catch (IOException e) {
+            LOGGER.info(e.getMessage());
+        }
     }
 
-    private void notRegistered() {
+    private void failureMessage(String msg) {
         failureLabel.setVisible(true);
-        failureLabel.setText("User already exists");
+        failureLabel.setText(msg);
+    }
+
+    private void fieldsCannotBeEmpty() throws InvalidEntryException {
+        failureLabel.setVisible(true);
+        if (loginField.getText().trim().isEmpty() || passField.getText().trim().isEmpty()) {
+            LOGGER.info("fields can't be empty");
+            throw new InvalidEntryException("fields can't be empty");
+        }
+    }
+
+    private void passwordsDoesNotMatch() throws InvalidEntryException {
+        if (!passField.getText().equals(repeatPassField.getText())) {
+            LOGGER.info("Password and confirm password does not match");
+            throw new InvalidEntryException("Password and confirm password does not match");
+        }
     }
 }

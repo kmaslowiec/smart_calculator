@@ -22,6 +22,8 @@
             <TextField fx:id="loginField"/>
             <Label text="password"/>
             <TextField fx:id="passField"/>
+            <Label text="repeatPassword"/>
+            <TextField fx:id="repeatPassField"/>
             <Label text="email"/>
             <TextField fx:id="emailField" onAction="#register"/>
             <Button fx:id="registerButton" onAction="#register" text="register"/>

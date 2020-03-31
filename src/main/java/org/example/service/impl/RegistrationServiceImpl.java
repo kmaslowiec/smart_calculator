@@ -3,7 +3,7 @@ package org.example.service.impl;
 import org.example.controller.RegisterController;
 import org.example.entity.User;
 import org.example.exception.InvalidEntryException;
-import org.example.repository.RegistrationDao;
+import org.example.repository.UserDao;
 import org.example.service.RegistrationService;
 import org.example.utils.MyRegex;
 
@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 public class RegistrationServiceImpl implements RegistrationService {
 
     private final static Logger LOGGER = Logger.getLogger(RegisterController.class.getName());
-    private RegistrationDao dao = new RegistrationDao();
+    private UserDao dao = new UserDao();
 
     private void emailValidation(String email) throws InvalidEntryException {
         if (!email.matches(MyRegex.EMAIL_IS_VALID)) {
