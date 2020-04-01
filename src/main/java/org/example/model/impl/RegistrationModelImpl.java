@@ -6,6 +6,7 @@ import org.example.exception.InvalidEntryException;
 import org.example.model.RegistrationModel;
 import org.example.model.UserDao;
 import org.example.utils.MyRegex;
+import org.example.utils.MyStrings;
 
 import java.util.logging.Logger;
 
@@ -16,8 +17,8 @@ public class RegistrationModelImpl implements RegistrationModel {
 
     private void emailValidation(String email) throws InvalidEntryException {
         if (!email.matches(MyRegex.EMAIL_IS_VALID)) {
-            LOGGER.info("Invalid e-mail address");
-            throw new InvalidEntryException("Invalid e-mail address");
+            LOGGER.info(MyStrings.EMAILS_INVALID_FORMAT);
+            throw new InvalidEntryException(MyStrings.EMAILS_INVALID_FORMAT);
         }
     }
 

@@ -4,21 +4,30 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import org.example.App;
 import org.example.entity.User;
-import org.example.model.UserDao;
+import org.example.exception.InvalidEntryException;
+import org.example.model.LoginModel;
+import org.example.model.impl.LoginModelImpl;
 import org.example.utils.MyRegex;
+import org.example.utils.MyStrings;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class LoginController implements Initializable {
 
-    private final static Logger LOGGER = Logger.getLogger(LoginController.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(LoginController.class.getName());
+    private static final String THIS_FXML = "login";
+    private static final String DIRECT_TO = "calculator";
+
     @FXML
     private Label failureLabel;
 
@@ -26,47 +35,50 @@ public class LoginController implements Initializable {
     private TextField loginField;
 
     @FXML
-    private TextField passField;
+    private PasswordField passField;
 
     @FXML
     private VBox form;
 
-    @FXML
-    private UserDao dao;
+    private LoginModel model;
     private int attempts;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         form.setSpacing(15.0);
-        dao = new UserDao();
+        model = new LoginModelImpl();
     }
 
     public void login(ActionEvent actionEvent) {
-        User user;
-        String login = loginField.getText();
-        if (login.matches(MyRegex.EMAIL_IS_VALID)) {
-            user = dao.findByEmail(login);
-        } else {
-            user = dao.findByName(login);
-        }
-        boolean isSecured = false;
-        if (user != null) {
-            isSecured = dao.findById(user.getId()).getPassword().equals(passField.getText());
-        }
+        try {
+            ViewValidator.fieldsCannotBeEmpty(failureLabel, new ArrayList<>(Arrays.asList(loginField, passField)), LOGGER);
+            User user = new User();
+            String login = loginField.getText();
+            if (login.matches(MyRegex.EMAIL_IS_VALID)) {
+                user.setEmail(login);
+            } else {
+                user.setName(login);
+            }
+            user.setPassword(passField.getText());
+            User authorizedUser = model.getUserIfAuthorized(user);
 
-        if (isSecured) {
-            try {
-                App.setRoot("calculator");
-            } catch (IOException e) {
-                LOGGER.info(e.getMessage());
+
+            if (authorizedUser != null) {
+                try {
+                    App.setRoot(DIRECT_TO);
+                } catch (IOException e) {
+                    LOGGER.info(e.getMessage());
+                }
+            } else {
+                attempts++;
+                if (attempts == 3) {
+                    System.exit(0);
+                }
+                throw new InvalidEntryException(MyStrings.ACCESS_DENIED);
             }
-        } else {
-            attempts++;
-            if (attempts == 3) {
-                System.exit(0);
-            }
-            failureLabel.setVisible(true);
-            failureLabel.setText("Access denied");
+        } catch (InvalidEntryException e) {
+            ViewValidator.failureMessage(failureLabel, e.getMessage());
+            ViewValidator.refreshScene(THIS_FXML, LOGGER);
         }
     }
 }
