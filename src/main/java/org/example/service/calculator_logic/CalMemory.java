@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Memory {
+public class CalMemory {
 
     private static Map<String, Integer> memory = new HashMap<>();
     private static Map<String, BigInteger> bigMemory = new HashMap<>();

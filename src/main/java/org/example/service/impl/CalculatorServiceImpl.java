@@ -2,8 +2,8 @@ package org.example.service.impl;
 
 import org.example.exception.InvalidEntryException;
 import org.example.service.CalculatorService;
+import org.example.service.calculator_logic.CalMemory;
 import org.example.service.calculator_logic.Calculate;
-import org.example.service.calculator_logic.Memory;
 import org.example.service.calculator_logic.OperatorsParser;
 import org.example.service.calculator_logic.PostfixConverter;
 import org.example.service.calculator_logic.ToStringArrayConverter;
@@ -22,7 +22,7 @@ public class CalculatorServiceImpl implements CalculatorService {
     private OperatorsParser operatorsParser;
     private VariableParser variableParser;
     private Calculate calculate;
-    private Memory memory;
+    private CalMemory calMemory;
 
     public CalculatorServiceImpl() {
         initComponents();
@@ -35,7 +35,7 @@ public class CalculatorServiceImpl implements CalculatorService {
         this.operatorsParser = new OperatorsParser();
         this.variableParser = new VariableParser();
         this.calculate = new Calculate();
-        this.memory = new Memory();
+        this.calMemory = new CalMemory();
     }
 
     @Override
@@ -58,9 +58,9 @@ public class CalculatorServiceImpl implements CalculatorService {
                 String[] converted = inputConverter.convert(input);
                 if (valid.isAssignment(input)) {
                     if (MyConditions.isBigNumber(converted[2])) {
-                        memory.addToBigMemory(converted[0], new BigInteger(converted[2]));
+                        calMemory.addToBigMemory(converted[0], new BigInteger(converted[2]));
                     } else {
-                        memory.addToMemory(converted[0], Integer.parseInt(converted[2]));
+                        calMemory.addToMemory(converted[0], Integer.parseInt(converted[2]));
                     }
                 } else {
                     String[] numAndOperators = variableParser.parseVariable(converted);

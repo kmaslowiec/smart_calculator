@@ -11,8 +11,8 @@ import javafx.scene.layout.VBox;
 import org.example.App;
 import org.example.entity.User;
 import org.example.exception.InvalidEntryException;
-import org.example.service.RegistrationService;
-import org.example.service.impl.RegistrationServiceImpl;
+import org.example.model.RegistrationModel;
+import org.example.model.impl.RegistrationModelImpl;
 
 import java.io.IOException;
 import java.net.URL;
@@ -38,7 +38,7 @@ public class RegisterController implements Initializable {
     private Label failureLabel;
     @FXML
     private TextField passField;
-    private RegistrationService service = new RegistrationServiceImpl();
+    private RegistrationModel service = new RegistrationModelImpl();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

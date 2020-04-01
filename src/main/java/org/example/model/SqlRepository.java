@@ -1,4 +1,4 @@
-package org.example.repository;
+package org.example.model;
 
 public interface SqlRepository<T, I> {
 

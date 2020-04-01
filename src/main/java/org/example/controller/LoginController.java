@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import org.example.App;
 import org.example.entity.User;
-import org.example.repository.UserDao;
+import org.example.model.UserDao;
 import org.example.utils.MyRegex;
 
 import java.io.IOException;
