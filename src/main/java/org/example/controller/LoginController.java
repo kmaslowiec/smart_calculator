@@ -3,7 +3,6 @@ package org.example.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -28,12 +27,6 @@ public class LoginController implements Initializable {
 
     @FXML
     private TextField passField;
-
-    @FXML
-    private Button loginButton;
-
-    @FXML
-    private Label successLabel;
 
     @FXML
     private VBox form;

@@ -69,7 +69,7 @@ public class RegisterController implements Initializable {
                         Thread.sleep(2000);
                         App.setRoot("register");
                     } catch (InterruptedException | IOException ex) {
-                        ex.printStackTrace();
+                        LOGGER.info(ex.getMessage());
                     }
                     return null;
                 }
@@ -108,5 +108,9 @@ public class RegisterController implements Initializable {
             LOGGER.info("Password and confirm password does not match");
             throw new InvalidEntryException("Password and confirm password does not match");
         }
+    }
+
+    private void passwordFieldEncapsulation() {
+
     }
 }

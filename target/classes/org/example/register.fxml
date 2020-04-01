@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import java.net.URL?>
+<?import javafx.scene.control.PasswordField?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal"
             fx:controller="org.example.controller.RegisterController">
     <stylesheets>
@@ -21,9 +22,9 @@
             <Label text="login"/>
             <TextField fx:id="loginField"/>
             <Label text="password"/>
-            <TextField fx:id="passField"/>
-            <Label text="repeatPassword"/>
-            <TextField fx:id="repeatPassField"/>
+            <PasswordField fx:id="passField"/>
+            <Label text="repeat password"/>
+            <PasswordField fx:id="repeatPassField"/>
             <Label text="email"/>
             <TextField fx:id="emailField" onAction="#register"/>
             <Button fx:id="registerButton" onAction="#register" text="register"/>
