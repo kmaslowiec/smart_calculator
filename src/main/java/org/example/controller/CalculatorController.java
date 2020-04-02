@@ -4,11 +4,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import org.example.App;
 import org.example.service.CalculatorService;
 import org.example.service.impl.CalculatorServiceImpl;
+import org.example.utils.InMemory;
 
 import java.io.IOException;
 import java.net.URL;
@@ -17,47 +19,67 @@ import java.util.ResourceBundle;
 public class CalculatorController implements Initializable {
 
     @FXML
-    public Button logOutButton;
-    CalculatorService calculator = new CalculatorServiceImpl();
-    String input;
+    private Label hello;
+
     @FXML
     TextField resultField;
+
     @FXML
     BorderPane mainPane;
+
     @FXML
     Button one;
+
     @FXML
     Button two;
+
     @FXML
     Button three;
+
     @FXML
     Button four;
+
     @FXML
     Button five;
+
     @FXML
     Button six;
+
     @FXML
     Button seven;
+
     @FXML
     Button eight;
+
     @FXML
     Button nine;
+
     @FXML
     Button plus;
+
     @FXML
     Button minus;
+
     @FXML
     Button equal;
+
     @FXML
     Button back;
+
     @FXML
     Button clear;
+
     @FXML
     Button send;
 
+    private CalculatorService calculator = new CalculatorServiceImpl();
+    private InMemory memory;
+    private String input;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        logOutButton.setVisible(false);
+        memory = new InMemory();
+        hello.setText("Hello " + memory.getUser().getName());
     }
 
     @FXML
@@ -69,8 +91,13 @@ public class CalculatorController implements Initializable {
     }
 
     @FXML
-    private void switchToLogin() throws IOException {
+    private void logOut() throws IOException {
         App.setRoot("login");
+    }
+
+    @FXML
+    private void goToMyProfile() throws IOException {
+        App.setRoot("profile");
     }
 
     @FXML

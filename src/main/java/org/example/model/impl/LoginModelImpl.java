@@ -11,7 +11,7 @@ public class LoginModelImpl implements LoginModel {
     @Override
     public User getUserIfAuthorized(User user) {
         User inDb = user.getName() == null ? dao.findByEmail(user.getEmail()) : dao.findByName(user.getName());
-        if (isAuthorized(user, inDb)) {
+        if (inDb != null && isAuthorized(user, inDb)) {
             return inDb;
         }
         return null;

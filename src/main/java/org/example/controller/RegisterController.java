@@ -66,6 +66,7 @@ public class RegisterController implements Initializable {
             user.setName(loginField.getText());
             user.setPassword(passField.getText());
             user.setEmail(emailField.getText());
+
             ViewValidator.fieldsCannotBeEmpty(failureLabel, new ArrayList<>(Arrays.asList(loginField, passField)), LOGGER);
             passwordsDoesNotMatch();
             boolean response = service.create(user);

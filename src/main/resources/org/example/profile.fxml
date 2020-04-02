@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.VBox?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal"
             fx:controller="org.example.controller.ProfileController">
-    <!--picture area-->
     <ImageView AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="25.0" fitHeight="140" fitWidth="125">
         <Image url="@pics/empty_profile.jpg"/>
     </ImageView>

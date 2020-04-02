@@ -1,9 +1,19 @@
 package org.example.utils;
 
-import lombok.Data;
+import org.example.entity.User;
+import org.example.model.UserDao;
 
-@Data
+
 public class InMemory {
 
-    private static Long userId;
+    private static User user = new User();
+    private static UserDao dao = new UserDao();
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(Long id) {
+        user = dao.findById(id);
+    }
 }

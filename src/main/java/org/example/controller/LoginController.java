@@ -12,6 +12,7 @@ import org.example.entity.User;
 import org.example.exception.InvalidEntryException;
 import org.example.model.LoginModel;
 import org.example.model.impl.LoginModelImpl;
+import org.example.utils.InMemory;
 import org.example.utils.MyRegex;
 import org.example.utils.MyStrings;
 
@@ -42,11 +43,13 @@ public class LoginController implements Initializable {
 
     private LoginModel model;
     private int attempts;
+    private InMemory memory;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         form.setSpacing(15.0);
         model = new LoginModelImpl();
+        memory = new InMemory();
     }
 
     public void login(ActionEvent actionEvent) {
@@ -62,9 +65,9 @@ public class LoginController implements Initializable {
             user.setPassword(passField.getText());
             User authorizedUser = model.getUserIfAuthorized(user);
 
-
             if (authorizedUser != null) {
                 try {
+                    memory.setUser(authorizedUser.getId());
                     App.setRoot(DIRECT_TO);
                 } catch (IOException e) {
                     LOGGER.info(e.getMessage());
