@@ -58,12 +58,16 @@ public class ProfileController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         buttonsBox.setSpacing(15.0);
         infoBox.setSpacing(15.0);
+        initClasses();
+        fillTheFields();
+    }
+
+    public void initClasses() {
         memory = new InMemory();
         user = memory.getUser();
         dao = new UserDao();
         blob = new BlobHelper();
         styles = new MyStyles();
-        fillTheFields();
     }
 
     private void fillTheFields() {
@@ -74,8 +78,7 @@ public class ProfileController implements Initializable {
 
     @FXML
     private void updateFile(MouseEvent mouseEvent) throws FileNotFoundException {
-        FileChooser fileChooser = new FileChooser();
-        file = fileChooser.showOpenDialog(node.getScene().getWindow());
+        file = getFileChooser().showOpenDialog(node.getScene().getWindow());
         if (file != null) {
             InputStream imgStream = new FileInputStream(file);
             styles.transformToCircle(avatarsPicture, new Image(imgStream), avatarsRadius);
@@ -97,5 +100,13 @@ public class ProfileController implements Initializable {
     @FXML
     private void cancel(ActionEvent actionEvent) throws IOException {
         App.setRoot("calculator");
+    }
+
+    private FileChooser getFileChooser() {
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter =
+                new FileChooser.ExtensionFilter("img files (*.jpg)", "*.jpg");
+        fileChooser.getExtensionFilters().add(extFilter);
+        return fileChooser;
     }
 }

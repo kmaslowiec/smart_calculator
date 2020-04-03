@@ -24,7 +24,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("login"), 500, 600);
+        scene = new Scene(loadFXML("profile"), 500, 600);
         stage.setTitle("Smart Calculator");
         scene.getStylesheets().add
                 (App.class.getResource("app.css").toExternalForm());
