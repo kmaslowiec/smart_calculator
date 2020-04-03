@@ -3,9 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<?import java.net.URL?>
 <?import javafx.scene.shape.Circle?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:id="mainPane" xmlns="http://javafx.com/javafx/10.0.2-internal"
             fx:controller="org.example.controller.CalculatorController">

@@ -5,17 +5,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import org.example.App;
 import org.example.entity.User;
 import org.example.model.UserDao;
 import org.example.model.model_utils.BlobHelper;
 import org.example.utils.InMemory;
+import org.example.utils.MyStyles;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,7 +29,7 @@ import java.util.ResourceBundle;
 public class ProfileController implements Initializable {
 
     @FXML
-    private ImageView profilePic;
+    private Circle avatarsPicture;
 
     @FXML
     private AnchorPane node;
@@ -47,42 +48,50 @@ public class ProfileController implements Initializable {
 
     private User user;
     private UserDao dao;
+    private BlobHelper blob;
+    private InMemory memory;
+    private MyStyles styles;
+    private File file;
+    private double avatarsRadius = 75.0;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         buttonsBox.setSpacing(15.0);
         infoBox.setSpacing(15.0);
-        InMemory memory = new InMemory();
+        memory = new InMemory();
         user = memory.getUser();
         dao = new UserDao();
+        blob = new BlobHelper();
+        styles = new MyStyles();
         fillTheFields();
     }
 
     private void fillTheFields() {
         login.setText(user.getName());
         email.setText(user.getEmail());
-        if (user.getPicture() != null) {
-            profilePic.setImage(BlobHelper.bytesToImage(user.getPicture()));
-        }
+        blob.showAvatar(avatarsPicture, memory, avatarsRadius);
     }
 
     @FXML
     private void updateFile(MouseEvent mouseEvent) throws FileNotFoundException {
         FileChooser fileChooser = new FileChooser();
-        File file = fileChooser.showOpenDialog(node.getScene().getWindow());
+        file = fileChooser.showOpenDialog(node.getScene().getWindow());
         if (file != null) {
             InputStream imgStream = new FileInputStream(file);
-            profilePic.setImage(new Image(imgStream));
-            byte[] pic = BlobHelper.fileToBytes(file);
-            user.setPicture(pic);
+            styles.transformToCircle(avatarsPicture, new Image(imgStream), avatarsRadius);
         }
     }
 
     @FXML
-    private void saveProfile(ActionEvent actionEvent) {
+    private void saveProfile(ActionEvent actionEvent) throws IOException {
         user.setName(login.getText());
         user.setEmail(email.getText());
+        if (file != null) {
+            byte[] pic = BlobHelper.fileToBytes(file);
+            user.setPicture(pic);
+        }
         dao.update(user);
+        App.setRoot("calculator");
     }
 
     @FXML

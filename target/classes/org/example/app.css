@@ -21,15 +21,14 @@
 }
 
 /*calculator view*/
-
-#calLabel{
+#calLabel {
     -fx-font-size: 16px;
     -fx-label-padding: 5px;
     -fx-font-family: Verdana;
     -fx-font-weight: bold;
 }
 
-#resultField{
+#resultField {
     -fx-max-width: 350;
     -fx-min-height: 75;
     -fx-font-size: 32px;
