@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import org.example.App;
+import org.example.model.UserDao;
 import org.example.service.CalculatorService;
 import org.example.service.impl.CalculatorServiceImpl;
 import org.example.utils.InMemory;
@@ -74,6 +75,7 @@ public class CalculatorController implements Initializable {
 
     private CalculatorService calculator = new CalculatorServiceImpl();
     private InMemory memory;
+    private UserDao dao = new UserDao();
     private String input;
 
     @Override

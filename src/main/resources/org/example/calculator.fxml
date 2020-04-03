@@ -9,6 +9,8 @@
         <!--menu bar-->
         <MenuBar>
             <Menu text="Menu">
+                <MenuItem text="pictToByte"/>
+                <MenuItem text="getPic"/>
                 <MenuItem text="My profile" onAction="#goToMyProfile"/>
                 <MenuItem text="Log out" onAction="#logOut"/>
             </Menu>

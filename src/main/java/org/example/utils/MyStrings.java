@@ -4,6 +4,8 @@ public class MyStrings {
 
     //pics
     public static final String ICON_IMG = "pics/icon.png";
+    public static final String AUTHOR_PIC = "pics/author.jpg";
+
 
     //exceptions messages
     public static final String INVALID_EXPRESSION = "Invalid expression";

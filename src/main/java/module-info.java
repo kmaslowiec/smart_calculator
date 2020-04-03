@@ -6,6 +6,7 @@ module org.example {
     requires lombok;
     requires ormlite;
     requires static org.mapstruct.processor;
+    requires java.desktop;
 
     opens org.example.controller to javafx.fxml;
     opens org.example.entity;
