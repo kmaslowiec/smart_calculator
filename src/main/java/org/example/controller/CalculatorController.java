@@ -6,12 +6,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import org.example.App;
-import org.example.model.UserDao;
+import org.example.model.model_utils.BlobHelper;
 import org.example.service.CalculatorService;
 import org.example.service.impl.CalculatorServiceImpl;
 import org.example.utils.InMemory;
+import org.example.utils.MyStyles;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,68 +22,76 @@ import java.util.ResourceBundle;
 public class CalculatorController implements Initializable {
 
     @FXML
+    private Circle avatarCircle;
+
+    @FXML
+    private VBox avatarVBox;
+
+    @FXML
     private Label hello;
 
     @FXML
-    TextField resultField;
+    private TextField resultField;
 
     @FXML
-    BorderPane mainPane;
+    private Button one;
 
     @FXML
-    Button one;
+    private Button two;
 
     @FXML
-    Button two;
+    private Button three;
 
     @FXML
-    Button three;
+    private Button four;
 
     @FXML
-    Button four;
+    private Button five;
 
     @FXML
-    Button five;
+    private Button six;
 
     @FXML
-    Button six;
+    private Button seven;
 
     @FXML
-    Button seven;
+    private Button eight;
 
     @FXML
-    Button eight;
+    private Button nine;
 
     @FXML
-    Button nine;
+    private Button plus;
 
     @FXML
-    Button plus;
+    private Button minus;
 
     @FXML
-    Button minus;
+    private Button equal;
 
     @FXML
-    Button equal;
+    private Button back;
 
     @FXML
-    Button back;
+    private Button clear;
 
     @FXML
-    Button clear;
+    private Button send;
 
-    @FXML
-    Button send;
-
-    private CalculatorService calculator = new CalculatorServiceImpl();
+    private CalculatorService calculator;
     private InMemory memory;
-    private UserDao dao = new UserDao();
+    private MyStyles styles;
+    private BlobHelper blob;
     private String input;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        avatarVBox.setSpacing(5.0);
+        calculator = new CalculatorServiceImpl();
         memory = new InMemory();
-        hello.setText("Hello " + memory.getUser().getName());
+        styles = new MyStyles();
+        blob = new BlobHelper();
+        initAvatarBox();
     }
 
     @FXML
@@ -143,5 +153,10 @@ public class CalculatorController implements Initializable {
                 resultField.setText(calculator.calculate(input));
             }
         }
+    }
+
+    private void initAvatarBox() {
+        hello.setText("Hi " + memory.getUser().getName());
+        blob.showAvatar(avatarCircle, memory, 40.0);
     }
 }
