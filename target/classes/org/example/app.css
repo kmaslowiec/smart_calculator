@@ -39,3 +39,11 @@
 #send {
     -fx-max-width: 500px;
 }
+
+/*password change view*/
+#changeButton{
+    -fx-min-width: 50px;
+    -fx-min-height: 30px;
+    -fx-focus-traversable: false;
+    -fx-background-radius: 5;
+}

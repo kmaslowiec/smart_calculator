@@ -1,7 +1,6 @@
-package org.example.utils;
+package org.example.model;
 
 import org.example.entity.User;
-import org.example.model.UserDao;
 
 
 public class InMemory {

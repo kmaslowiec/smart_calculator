@@ -10,9 +10,9 @@ import javafx.scene.layout.VBox;
 import org.example.App;
 import org.example.entity.User;
 import org.example.exception.InvalidEntryException;
+import org.example.model.InMemory;
 import org.example.model.LoginModel;
 import org.example.model.impl.LoginModelImpl;
-import org.example.utils.InMemory;
 import org.example.utils.MyRegex;
 import org.example.utils.MyStrings;
 
@@ -54,7 +54,7 @@ public class LoginController implements Initializable {
 
     public void login(ActionEvent actionEvent) {
         try {
-            ViewValidator.fieldsCannotBeEmpty(failureLabel, new ArrayList<>(Arrays.asList(loginField, passField)), LOGGER);
+            ViewHelper.fieldsCannotBeEmpty(failureLabel, new ArrayList<>(Arrays.asList(loginField, passField)), LOGGER);
             User user = new User();
             String login = loginField.getText();
             if (login.matches(MyRegex.EMAIL_IS_VALID)) {
@@ -80,8 +80,8 @@ public class LoginController implements Initializable {
                 throw new InvalidEntryException(MyStrings.ACCESS_DENIED);
             }
         } catch (InvalidEntryException e) {
-            ViewValidator.failureMessage(failureLabel, e.getMessage());
-            ViewValidator.refreshScene(THIS_FXML, LOGGER);
+            ViewHelper.failureMessage(failureLabel, e.getMessage());
+            ViewHelper.refreshScene(THIS_FXML, LOGGER);
         }
     }
 }

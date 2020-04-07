@@ -3,7 +3,7 @@ package org.example.model.model_utils;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Circle;
 import org.example.App;
-import org.example.utils.InMemory;
+import org.example.model.InMemory;
 import org.example.utils.MyStrings;
 import org.example.utils.MyStyles;
 

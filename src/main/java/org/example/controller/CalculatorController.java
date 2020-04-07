@@ -9,10 +9,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import org.example.App;
+import org.example.model.InMemory;
 import org.example.model.model_utils.BlobHelper;
 import org.example.service.CalculatorService;
 import org.example.service.impl.CalculatorServiceImpl;
-import org.example.utils.InMemory;
 import org.example.utils.MyStyles;
 
 import java.io.IOException;

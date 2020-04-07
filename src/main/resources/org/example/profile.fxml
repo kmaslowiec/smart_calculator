@@ -18,7 +18,7 @@
         <Label text="e-mail"/>
         <TextField fx:id="email"/>
         <HBox alignment="CENTER">
-            <Button fx:id="changePass" text="change password"/>
+            <Button text="change password" onAction="#changePassword"/>
         </HBox>
     </VBox>
     <!--buttons area-->

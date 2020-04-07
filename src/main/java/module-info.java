@@ -7,6 +7,7 @@ module org.example {
     requires ormlite;
     requires static org.mapstruct.processor;
     requires java.desktop;
+    requires org.controlsfx.controls;
 
     opens org.example.controller to javafx.fxml;
     opens org.example.entity;

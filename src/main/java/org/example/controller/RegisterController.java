@@ -5,13 +5,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import org.example.App;
 import org.example.entity.User;
 import org.example.exception.InvalidEntryException;
-import org.example.model.RegistrationModel;
-import org.example.model.impl.RegistrationModelImpl;
+import org.example.model.UserDao;
 import org.example.utils.MyStrings;
 
 import java.io.IOException;
@@ -34,7 +34,7 @@ public class RegisterController implements Initializable {
     private TextField repeatPassField;
 
     @FXML
-    private TextField loginField;
+    private PasswordField loginField;
 
     @FXML
     private VBox form;
@@ -49,15 +49,18 @@ public class RegisterController implements Initializable {
     private Label failureLabel;
 
     @FXML
-    private TextField passField;
+    private PasswordField passField;
 
-    private RegistrationModel service = new RegistrationModelImpl();
+    private UserDao dao;
+    private ViewHelper viewHelper;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         form.setSpacing(15.0);
         successLabel.setVisible(false);
+        viewHelper = new ViewHelper();
+        dao = new UserDao();
     }
 
     public void register(ActionEvent actionEvent) {
@@ -67,17 +70,19 @@ public class RegisterController implements Initializable {
             user.setPassword(passField.getText());
             user.setEmail(emailField.getText());
 
-            ViewValidator.fieldsCannotBeEmpty(failureLabel, new ArrayList<>(Arrays.asList(loginField, passField)), LOGGER);
-            passwordsDoesNotMatch();
-            boolean response = service.create(user);
+            ViewHelper.fieldsCannotBeEmpty(failureLabel, new ArrayList<>(Arrays.asList(loginField, passField)), LOGGER);
+            viewHelper.passwordsDoesNotMatch(loginField, passField, LOGGER);
+
+            boolean response = viewHelper.emailValidation(emailField.toString(), LOGGER);
             if (response) {
+                dao.create(user);
                 registered();
             } else {
-                ViewValidator.failureMessage(failureLabel, MyStrings.USER_EXISTS);
+                ViewHelper.failureMessage(failureLabel, MyStrings.USER_EXISTS);
             }
         } catch (InvalidEntryException e) {
-            ViewValidator.failureMessage(failureLabel, e.getMessage());
-            ViewValidator.refreshScene(THIS_FXML, LOGGER);
+            ViewHelper.failureMessage(failureLabel, e.getMessage());
+            ViewHelper.refreshScene(THIS_FXML, LOGGER);
         }
     }
 
@@ -90,13 +95,6 @@ public class RegisterController implements Initializable {
             App.setRoot(DIRECT_TO);
         } catch (IOException e) {
             LOGGER.info(e.getMessage());
-        }
-    }
-
-    private void passwordsDoesNotMatch() throws InvalidEntryException {
-        if (!passField.getText().equals(repeatPassField.getText())) {
-            LOGGER.info(MyStrings.PASSWORD_DOES_NOT_MATCH);
-            throw new InvalidEntryException(MyStrings.PASSWORD_DOES_NOT_MATCH);
         }
     }
 }
