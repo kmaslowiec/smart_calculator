@@ -17,7 +17,11 @@ public class LoginModelImpl implements LoginModel {
         return null;
     }
 
-    private boolean isAuthorized(User enteredUser, User inDb) {
+    public boolean isAuthorized(User enteredUser, User inDb) {
         return dao.findById(inDb.getId()).getPassword().equals(enteredUser.getPassword());
+    }
+
+    public boolean isAuthorized(String enteredPassword, User inDb) {
+        return dao.findById(inDb.getId()).getPassword().equals(enteredPassword);
     }
 }

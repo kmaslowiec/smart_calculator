@@ -4,16 +4,16 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import org.example.App;
+import javafx.scene.paint.Color;
 import org.example.entity.User;
 import org.example.exception.InvalidEntryException;
 import org.example.model.InMemory;
 import org.example.model.UserDao;
+import org.example.model.impl.LoginModelImpl;
+import org.example.utils.MyStrings;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,7 +23,6 @@ import java.util.logging.Logger;
 public class PasswordPopoverController extends ProfileController implements Initializable {
 
     private final static Logger LOGGER = Logger.getLogger(PasswordPopoverController.class.getName());
-    //private static final String THIS_FXML = "password_popover";
 
     @FXML
     private PasswordField passField;
@@ -32,14 +31,12 @@ public class PasswordPopoverController extends ProfileController implements Init
     private PasswordField repeatPassField;
 
     @FXML
-    private Label successLabel;
+    private PasswordField currentPassword;
 
     @FXML
-    private Button changeButton;
+    private Label infoLabel;
 
-    @FXML
-    private Label failureLabel;
-
+    private LoginModelImpl model;
     private InMemory memory;
     private UserDao dao;
     private ViewHelper viewHelper;
@@ -49,21 +46,23 @@ public class PasswordPopoverController extends ProfileController implements Init
         memory = new InMemory();
         viewHelper = new ViewHelper();
         dao = new UserDao();
+        model = new LoginModelImpl();
     }
 
     public void change(ActionEvent actionEvent) {
         try {
             User user = memory.getUser();
-
-            ViewHelper.fieldsCannotBeEmpty(failureLabel, new ArrayList<>(Arrays.asList(passField, repeatPassField)), LOGGER);
+            if (!model.isAuthorized(currentPassword.getText(), user)) throw new InvalidEntryException(MyStrings.WRONG_PASSWORD);
+            ViewHelper.fieldsCannotBeEmpty(infoLabel, new ArrayList<>(Arrays.asList(passField, repeatPassField)), LOGGER);
             viewHelper.passwordsDoesNotMatch(passField, repeatPassField, LOGGER);
             user.setPassword(repeatPassField.getText());
             dao.update(user);
+            infoLabel.setTextFill(Color.GREEN);
+            infoLabel.setText("Success");
+            success();
             ProfileController.popOver.hide();
-            App.setRoot("profile");
-
-        } catch (InvalidEntryException | IOException e) {
-            ViewHelper.failureMessage(failureLabel, e.getMessage());
+        } catch (InvalidEntryException e) {
+            ViewHelper.failureMessage(infoLabel, e.getMessage());
             refreshPopOver();
         }
     }
@@ -74,9 +73,26 @@ public class PasswordPopoverController extends ProfileController implements Init
             protected Void call() {
                 try {
                     Thread.sleep(2000);
-                    failureLabel.setVisible(false);
+                    infoLabel.setVisible(false);
                     repeatPassField.setText("");
                     passField.setText("");
+                    currentPassword.setText("");
+                } catch (InterruptedException ex) {
+                    LOGGER.info(ex.getMessage());
+                }
+                return null;
+            }
+        };
+        new Thread(task).start();
+    }
+
+    private void success() {
+        Task<Void> task = new Task<>() {
+            @Override
+            protected Void call() {
+                try {
+                    Thread.sleep(300);
+                    ProfileController.popOver.hide();
                 } catch (InterruptedException ex) {
                     LOGGER.info(ex.getMessage());
                 }

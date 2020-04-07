@@ -15,7 +15,7 @@
     </padding>
     <center>
         <VBox fx:id="form" alignment="CENTER">
-            <Label fx:id="failureLabel"/>
+            <Label fx:id="infoLabel"/>
             <Label text="name or e-mail"/>
             <TextField fx:id="loginField"/>
             <Label text="password"/>

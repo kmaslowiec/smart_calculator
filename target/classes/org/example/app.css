@@ -16,7 +16,7 @@
     -fx-background-radius: 5;
 }
 
-#failureLabel {
+#infoLabel {
     -fx-text-fill: red;
 }
 
@@ -41,7 +41,7 @@
 }
 
 /*password change view*/
-#changeButton{
+#changeButton {
     -fx-min-width: 50px;
     -fx-min-height: 30px;
     -fx-focus-traversable: false;

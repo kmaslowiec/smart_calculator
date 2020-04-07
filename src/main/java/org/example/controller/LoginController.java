@@ -30,7 +30,7 @@ public class LoginController implements Initializable {
     private static final String DIRECT_TO = "calculator";
 
     @FXML
-    private Label failureLabel;
+    private Label infoLabel;
 
     @FXML
     private TextField loginField;
@@ -54,7 +54,7 @@ public class LoginController implements Initializable {
 
     public void login(ActionEvent actionEvent) {
         try {
-            ViewHelper.fieldsCannotBeEmpty(failureLabel, new ArrayList<>(Arrays.asList(loginField, passField)), LOGGER);
+            ViewHelper.fieldsCannotBeEmpty(infoLabel, new ArrayList<>(Arrays.asList(loginField, passField)), LOGGER);
             User user = new User();
             String login = loginField.getText();
             if (login.matches(MyRegex.EMAIL_IS_VALID)) {
@@ -80,7 +80,7 @@ public class LoginController implements Initializable {
                 throw new InvalidEntryException(MyStrings.ACCESS_DENIED);
             }
         } catch (InvalidEntryException e) {
-            ViewHelper.failureMessage(failureLabel, e.getMessage());
+            ViewHelper.failureMessage(infoLabel, e.getMessage());
             ViewHelper.refreshScene(THIS_FXML, LOGGER);
         }
     }

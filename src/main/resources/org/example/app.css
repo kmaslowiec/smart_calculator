@@ -16,7 +16,7 @@
     -fx-background-radius: 5;
 }
 
-#failureLabel {
+#infoLabel {
     -fx-text-fill: red;
 }
 

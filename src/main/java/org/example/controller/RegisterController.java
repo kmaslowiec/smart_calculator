@@ -31,10 +31,10 @@ public class RegisterController implements Initializable {
     private TextField emailField;
 
     @FXML
-    private TextField repeatPassField;
+    private PasswordField repeatPassField;
 
     @FXML
-    private PasswordField loginField;
+    private TextField loginField;
 
     @FXML
     private VBox form;
@@ -71,7 +71,7 @@ public class RegisterController implements Initializable {
             user.setEmail(emailField.getText());
 
             ViewHelper.fieldsCannotBeEmpty(failureLabel, new ArrayList<>(Arrays.asList(loginField, passField)), LOGGER);
-            viewHelper.passwordsDoesNotMatch(loginField, passField, LOGGER);
+            viewHelper.passwordsDoesNotMatch(repeatPassField, passField, LOGGER);
 
             boolean response = viewHelper.emailValidation(emailField.toString(), LOGGER);
             if (response) {

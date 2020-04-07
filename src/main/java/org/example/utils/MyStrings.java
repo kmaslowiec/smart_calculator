@@ -17,6 +17,7 @@ public class MyStrings {
     public static final String PASSWORD_DOES_NOT_MATCH = "Password and confirm password does not match";
     public static final String FIELDS_CANT_BE_EMPTY = "fields can't be empty";
     public static final String ACCESS_DENIED = "Access denied";
+    public static final String WRONG_PASSWORD = "Wrong password";
     public static final String EMAILS_INVALID_FORMAT = "Invalid e-mail's format";
 
     //registration messages
