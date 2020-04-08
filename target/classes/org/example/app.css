@@ -20,7 +20,24 @@
     -fx-text-fill: red;
 }
 
-/*calculator view*/
+/*register button in login.fxml
+  change button in password_popover.fxml
+*/
+.small-button {
+    -fx-min-width: 50px;
+    -fx-min-height: 30px;
+    -fx-focus-traversable: false;
+    -fx-background-radius: 5;
+}
+
+/*calculate button in calculator.fxml
+  save button in calculator.fxml
+*/
+.long-button {
+    -fx-max-width: 500px;
+}
+
+/*calculator scene*/
 #calLabel {
     -fx-font-size: 16px;
     -fx-label-padding: 5px;
@@ -34,16 +51,4 @@
     -fx-font-size: 32px;
     -fx-font-family: Verdana;
     -fx-text-box-border: transparent;
-}
-
-#send {
-    -fx-max-width: 500px;
-}
-
-/*password change view*/
-#changeButton {
-    -fx-min-width: 50px;
-    -fx-min-height: 30px;
-    -fx-focus-traversable: false;
-    -fx-background-radius: 5;
 }

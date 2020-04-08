@@ -15,4 +15,8 @@ public class InMemory {
     public void setUser(Long id) {
         user = dao.findById(id);
     }
+
+    public void clearUser() {
+        user = null;
+    }
 }

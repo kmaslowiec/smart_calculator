@@ -13,7 +13,6 @@ import org.example.model.InMemory;
 import org.example.model.model_utils.BlobHelper;
 import org.example.service.CalculatorService;
 import org.example.service.impl.CalculatorServiceImpl;
-import org.example.utils.MyStyles;
 
 import java.io.IOException;
 import java.net.URL;
@@ -76,11 +75,13 @@ public class CalculatorController implements Initializable {
     private Button clear;
 
     @FXML
-    private Button send;
+    private Button calculate;
+
+    @FXML
+    private Button save;
 
     private CalculatorService calculator;
     private InMemory memory;
-    private MyStyles styles;
     private BlobHelper blob;
     private String input;
 
@@ -89,7 +90,6 @@ public class CalculatorController implements Initializable {
         avatarVBox.setSpacing(5.0);
         calculator = new CalculatorServiceImpl();
         memory = new InMemory();
-        styles = new MyStyles();
         blob = new BlobHelper();
         initAvatarBox();
     }
@@ -104,6 +104,7 @@ public class CalculatorController implements Initializable {
 
     @FXML
     private void logOut() throws IOException {
+        memory.clearUser();
         App.setRoot("login");
     }
 
@@ -147,11 +148,13 @@ public class CalculatorController implements Initializable {
             }
         } else if (event.getSource() == clear) {
             resultField.setText("");
-        } else if (event.getSource() == send) {
+        } else if (event.getSource() == calculate) {
             input = resultField.getText();
             if (!input.isEmpty()) {
                 resultField.setText(calculator.calculate(input));
             }
+        } else if (event.getSource() == save) {
+            System.out.println("saved");
         }
     }
 

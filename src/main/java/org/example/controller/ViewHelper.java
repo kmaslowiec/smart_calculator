@@ -15,8 +15,8 @@ import java.util.logging.Logger;
 
 public class ViewHelper {
 
-    public static void fieldsCannotBeEmpty(Label failureLabel, List<TextField> fields, Logger LOGGER) throws InvalidEntryException {
-        failureLabel.setVisible(true);
+    public static void fieldsCannotBeEmpty(Label infoLabel, List<TextField> fields, Logger LOGGER) throws InvalidEntryException {
+        infoLabel.setVisible(true);
         for (TextField i : fields) {
             if (i.getText().trim().isEmpty()) {
                 LOGGER.info(MyStrings.FIELDS_CANT_BE_EMPTY);

@@ -20,7 +20,7 @@
     -fx-text-fill: red;
 }
 
-/*register button in Login.fxml
+/*register button in login.fxml
   change button in password_popover.fxml
 */
 .small-button {
@@ -28,6 +28,13 @@
     -fx-min-height: 30px;
     -fx-focus-traversable: false;
     -fx-background-radius: 5;
+}
+
+/*calculate button in calculator.fxml
+  save button in calculator.fxml
+*/
+.long-button {
+    -fx-max-width: 500px;
 }
 
 /*calculator scene*/
@@ -45,8 +52,3 @@
     -fx-font-family: Verdana;
     -fx-text-box-border: transparent;
 }
-
-#send {
-    -fx-max-width: 500px;
-}
-

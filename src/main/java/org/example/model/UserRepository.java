@@ -1,12 +1,12 @@
 package org.example.model;
 
-public interface UserRepository<T, I> {
+public interface UserRepository<User, Long> {
 
-    boolean create(T entity);
+    boolean create(User entity);
 
-    T findById(I id);
+    User findById(Long id);
 
-    boolean update(T entity);
+    boolean update(User entity);
 
-    boolean delete(T entity);
+    boolean delete(User entity);
 }

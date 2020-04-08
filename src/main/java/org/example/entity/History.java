@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 public class History {
 
     @DatabaseField(generatedId = true, unique = true)
-    private long id;
+    private Long id;
 
     @DatabaseField
     private Timestamp date;

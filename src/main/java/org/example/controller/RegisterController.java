@@ -46,7 +46,7 @@ public class RegisterController implements Initializable {
     private Label successLabel;
 
     @FXML
-    private Label failureLabel;
+    private Label infoLabel;
 
     @FXML
     private PasswordField passField;
@@ -70,18 +70,18 @@ public class RegisterController implements Initializable {
             user.setPassword(passField.getText());
             user.setEmail(emailField.getText());
 
-            ViewHelper.fieldsCannotBeEmpty(failureLabel, new ArrayList<>(Arrays.asList(loginField, passField)), LOGGER);
+            ViewHelper.fieldsCannotBeEmpty(infoLabel, new ArrayList<>(Arrays.asList(loginField, passField)), LOGGER);
             viewHelper.passwordsDoesNotMatch(repeatPassField, passField, LOGGER);
 
-            boolean response = viewHelper.emailValidation(emailField.toString(), LOGGER);
+            boolean response = viewHelper.emailValidation(emailField.getText(), LOGGER);
             if (response) {
                 dao.create(user);
                 registered();
             } else {
-                ViewHelper.failureMessage(failureLabel, MyStrings.USER_EXISTS);
+                ViewHelper.failureMessage(infoLabel, MyStrings.USER_EXISTS);
             }
         } catch (InvalidEntryException e) {
-            ViewHelper.failureMessage(failureLabel, e.getMessage());
+            ViewHelper.failureMessage(infoLabel, e.getMessage());
             ViewHelper.refreshScene(THIS_FXML, LOGGER);
         }
     }
@@ -90,7 +90,7 @@ public class RegisterController implements Initializable {
         registerButton.setVisible(false);
         successLabel.setText(MyStrings.REGISTRATION_SUCCESS);
         successLabel.setVisible(true);
-        failureLabel.setVisible(false);
+        infoLabel.setVisible(false);
         try {
             App.setRoot(DIRECT_TO);
         } catch (IOException e) {
