@@ -41,7 +41,6 @@ public class CalculatorServiceImpl implements CalculatorService {
     @Override
     public String calculate(String input) {
         try {
-
             if (input.contains("/")) {
                 return valid.commandsManager(input);
             } else {
@@ -64,6 +63,9 @@ public class CalculatorServiceImpl implements CalculatorService {
                     }
                 } else {
                     String[] numAndOperators = variableParser.parseVariable(converted);
+                    if (converted.length > 1) {
+                        calMemory.setResult(true);
+                    } // check if the calculation is result
                     String postfix = postfixConverter.convertInfix(numAndOperators);
                     String[] splitPostfix = postfix.split(",");
                     return calculate.calPostfix(splitPostfix);
@@ -73,5 +75,10 @@ public class CalculatorServiceImpl implements CalculatorService {
             return e.getMessage();
         }
         return "";
+    }
+
+    @Override
+    public void clearIsResult() {
+        calMemory.setResult(false);
     }
 }

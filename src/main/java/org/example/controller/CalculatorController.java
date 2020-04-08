@@ -75,12 +75,13 @@ public class CalculatorController implements Initializable {
     private Button clear;
 
     @FXML
-    private Button calculate;
+    private Button enter;
 
     @FXML
     private Button save;
 
     private CalculatorService calculator;
+    private ViewHelper viewHelper;
     private InMemory memory;
     private BlobHelper blob;
     private String input;
@@ -89,6 +90,7 @@ public class CalculatorController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         avatarVBox.setSpacing(5.0);
         calculator = new CalculatorServiceImpl();
+        viewHelper = new ViewHelper();
         memory = new InMemory();
         blob = new BlobHelper();
         initAvatarBox();
@@ -148,13 +150,18 @@ public class CalculatorController implements Initializable {
             }
         } else if (event.getSource() == clear) {
             resultField.setText("");
-        } else if (event.getSource() == calculate) {
+        } else if (event.getSource() == enter) {
             input = resultField.getText();
             if (!input.isEmpty()) {
                 resultField.setText(calculator.calculate(input));
             }
         } else if (event.getSource() == save) {
-            System.out.println("saved");
+            if (viewHelper.isResult()) {
+                System.out.println("saved");
+                calculator.clearIsResult();
+            } else {
+                System.out.println("not saved");
+            }
         }
     }
 

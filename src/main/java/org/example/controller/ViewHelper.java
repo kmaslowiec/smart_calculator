@@ -6,6 +6,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.example.App;
 import org.example.exception.InvalidEntryException;
+import org.example.service.calculator_logic.CalMemory;
 import org.example.utils.MyRegex;
 import org.example.utils.MyStrings;
 
@@ -14,6 +15,12 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class ViewHelper {
+
+    private CalMemory calMemory;
+
+    public ViewHelper() {
+        this.calMemory = new CalMemory();
+    }
 
     public static void fieldsCannotBeEmpty(Label infoLabel, List<TextField> fields, Logger LOGGER) throws InvalidEntryException {
         infoLabel.setVisible(true);
@@ -59,5 +66,9 @@ public class ViewHelper {
             LOGGER.info(MyStrings.PASSWORD_DOES_NOT_MATCH);
             throw new InvalidEntryException(MyStrings.PASSWORD_DOES_NOT_MATCH);
         }
+    }
+
+    public boolean isResult() {
+        return calMemory.isResult();
     }
 }

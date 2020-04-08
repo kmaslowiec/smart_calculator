@@ -8,6 +8,7 @@ public class CalMemory {
 
     private static Map<String, Integer> memory = new HashMap<>();
     private static Map<String, BigInteger> bigMemory = new HashMap<>();
+    private static boolean result;
 
     public void addToMemory(String identifier, int assignment) {
         memory.put(identifier, assignment);
@@ -23,5 +24,13 @@ public class CalMemory {
 
     public BigInteger getBigNumber(String key) {
         return bigMemory.get(key);
+    }
+
+    public boolean isResult() {
+        return result;
+    }
+
+    public void setResult(boolean isResult) {
+        CalMemory.result = isResult;
     }
 }
