@@ -23,6 +23,9 @@ public class History {
     @DatabaseField
     private String calculation;
 
+    @DatabaseField
+    private String result;
+
     @DatabaseField(foreign = true, foreignAutoRefresh = true)
     private User user;
 }

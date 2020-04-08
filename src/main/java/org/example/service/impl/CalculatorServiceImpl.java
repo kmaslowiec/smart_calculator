@@ -63,9 +63,10 @@ public class CalculatorServiceImpl implements CalculatorService {
                     }
                 } else {
                     String[] numAndOperators = variableParser.parseVariable(converted);
+                    calMemory.setLastCalculation(String.join("", numAndOperators));
                     if (converted.length > 1) {
                         calMemory.setResult(true);
-                    } // check if the calculation is result
+                    } // check if the calculation is a result
                     String postfix = postfixConverter.convertInfix(numAndOperators);
                     String[] splitPostfix = postfix.split(",");
                     return calculate.calPostfix(splitPostfix);
@@ -80,5 +81,10 @@ public class CalculatorServiceImpl implements CalculatorService {
     @Override
     public void clearIsResult() {
         calMemory.setResult(false);
+    }
+
+    @Override
+    public String getLastCalculation() {
+        return calMemory.getLastCalculation();
     }
 }

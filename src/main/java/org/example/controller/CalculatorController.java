@@ -83,7 +83,7 @@ public class CalculatorController implements Initializable {
     @FXML
     private Button save;
 
-    private CalculatorService calculator;
+    private CalculatorService calculatorService;
     private HistoryService historyService;
     private ViewHelper viewHelper;
     private InMemory memory;
@@ -93,7 +93,7 @@ public class CalculatorController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         avatarVBox.setSpacing(5.0);
-        calculator = new CalculatorServiceImpl();
+        calculatorService = new CalculatorServiceImpl();
         historyService = new HistoryServiceImpl();
         viewHelper = new ViewHelper();
         memory = new InMemory();
@@ -105,7 +105,7 @@ public class CalculatorController implements Initializable {
     private void cal() {
         input = resultField.getText();
         if (!input.isEmpty()) {
-            resultField.setText(calculator.calculate(input));
+            resultField.setText(calculatorService.calculate(input));
         }
     }
 
@@ -158,16 +158,17 @@ public class CalculatorController implements Initializable {
         } else if (event.getSource() == enter) {
             input = resultField.getText();
             if (!input.isEmpty()) {
-                resultField.setText(calculator.calculate(input));
+                resultField.setText(calculatorService.calculate(input));
             }
         } else if (event.getSource() == save) {
             if (viewHelper.isResult()) {
                 History history = new History();
-                history.setCalculation(resultField.getText());
+                history.setCalculation(calculatorService.getLastCalculation());
+                history.setResult(resultField.getText());
                 historyService.add(history);
-                calculator.clearIsResult();
+                calculatorService.clearIsResult();
             } else {
-                System.out.println("not saved");
+                System.out.println("no saved");
             }
         }
     }

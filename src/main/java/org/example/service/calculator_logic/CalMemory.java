@@ -8,6 +8,7 @@ public class CalMemory {
 
     private static Map<String, Integer> memory = new HashMap<>();
     private static Map<String, BigInteger> bigMemory = new HashMap<>();
+    private static String lastCalculation = "";
     private static boolean result;
 
     public void addToMemory(String identifier, int assignment) {
@@ -32,5 +33,13 @@ public class CalMemory {
 
     public void setResult(boolean isResult) {
         CalMemory.result = isResult;
+    }
+
+    public String getLastCalculation() {
+        return lastCalculation;
+    }
+
+    public void setLastCalculation(String lastCalculation) {
+        CalMemory.lastCalculation = lastCalculation;
     }
 }

@@ -71,4 +71,12 @@ public class ViewHelper {
     public boolean isResult() {
         return calMemory.isResult();
     }
+
+    /*public void saveLastCalculation(String lastCalculation){
+        if(!lastCalculation.matches(MyRegex.IS_ASSIGNMENT)){
+            calMemory.setLastCalculation(lastCalculation);
+        }else{
+            System.out.println("cal not saved");
+        }
+    }*/
 }
