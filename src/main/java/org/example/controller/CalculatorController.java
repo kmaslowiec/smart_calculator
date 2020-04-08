@@ -9,10 +9,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import org.example.App;
+import org.example.entity.History;
 import org.example.model.InMemory;
 import org.example.model.model_utils.BlobHelper;
 import org.example.service.CalculatorService;
+import org.example.service.HistoryService;
 import org.example.service.impl.CalculatorServiceImpl;
+import org.example.service.impl.HistoryServiceImpl;
 
 import java.io.IOException;
 import java.net.URL;
@@ -81,6 +84,7 @@ public class CalculatorController implements Initializable {
     private Button save;
 
     private CalculatorService calculator;
+    private HistoryService historyService;
     private ViewHelper viewHelper;
     private InMemory memory;
     private BlobHelper blob;
@@ -90,6 +94,7 @@ public class CalculatorController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         avatarVBox.setSpacing(5.0);
         calculator = new CalculatorServiceImpl();
+        historyService = new HistoryServiceImpl();
         viewHelper = new ViewHelper();
         memory = new InMemory();
         blob = new BlobHelper();
@@ -157,7 +162,9 @@ public class CalculatorController implements Initializable {
             }
         } else if (event.getSource() == save) {
             if (viewHelper.isResult()) {
-                System.out.println("saved");
+                History history = new History();
+                history.setCalculation(resultField.getText());
+                historyService.add(history);
                 calculator.clearIsResult();
             } else {
                 System.out.println("not saved");
