@@ -20,7 +20,17 @@
     -fx-text-fill: red;
 }
 
-/*calculator view*/
+/*register button in Login.fxml
+  change button in password_popover.fxml
+*/
+.small-button {
+    -fx-min-width: 50px;
+    -fx-min-height: 30px;
+    -fx-focus-traversable: false;
+    -fx-background-radius: 5;
+}
+
+/*calculator scene*/
 #calLabel {
     -fx-font-size: 16px;
     -fx-label-padding: 5px;
@@ -40,10 +50,3 @@
     -fx-max-width: 500px;
 }
 
-/*password change view*/
-#changeButton {
-    -fx-min-width: 50px;
-    -fx-min-height: 30px;
-    -fx-focus-traversable: false;
-    -fx-background-radius: 5;
-}

@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.example.model.SqlConnection;
 import org.example.utils.MyStrings;
 
 import java.io.IOException;
@@ -33,6 +34,7 @@ public class App extends Application {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+        SqlConnection.createDatabase();
     }
 
     private static Parent loadFXML(String fxml) throws IOException {

@@ -6,6 +6,7 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             xmlns="http://javafx.com/javafx"
@@ -13,8 +14,17 @@
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
+    <top>
+        <HBox>
+            <padding>
+                <Insets left="20.0" right="20.0" top="20.0"/>
+            </padding>
+            <Button onAction="#goToRegister" text="register" styleClass="small-button"/>
+        </HBox>
+    </top>
     <center>
         <VBox fx:id="form" alignment="CENTER">
+            <Button text="login" onAction="#login"/>
             <Label fx:id="infoLabel"/>
             <Label text="name or e-mail"/>
             <TextField fx:id="loginField"/>

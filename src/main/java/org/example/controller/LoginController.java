@@ -84,4 +84,8 @@ public class LoginController implements Initializable {
             ViewHelper.refreshScene(THIS_FXML, LOGGER);
         }
     }
+
+    public void goToRegister(ActionEvent actionEvent) throws IOException {
+        App.setRoot("register");
+    }
 }

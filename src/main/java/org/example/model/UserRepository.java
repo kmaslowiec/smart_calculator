@@ -1,6 +1,6 @@
 package org.example.model;
 
-public interface SqlRepository<T, I> {
+public interface UserRepository<T, I> {
 
     boolean create(T entity);
 
