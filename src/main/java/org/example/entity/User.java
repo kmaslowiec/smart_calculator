@@ -1,7 +1,9 @@
 package org.example.entity;
 
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,4 +29,7 @@ public class User {
 
     @DatabaseField(dataType = DataType.BYTE_ARRAY)
     byte[] picture;
+
+    @ForeignCollectionField
+    private ForeignCollection<History> histories;
 }
