@@ -1,8 +1,11 @@
 package org.example.model;
 
 import org.example.entity.History;
+import org.example.entity.User;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class HistoryDao implements HistoryRepository<History, Long> {
@@ -18,5 +21,15 @@ public class HistoryDao implements HistoryRepository<History, Long> {
             LOGGER.info(e.getMessage());
         }
         return false;
+    }
+
+    @Override
+    public List<History> findByUser(User user) {
+        return null;
+    }
+
+    @Override
+    public List<History> findByDate(Timestamp date) {
+        return null;
     }
 }

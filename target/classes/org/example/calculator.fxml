@@ -11,6 +11,7 @@
         <MenuBar>
             <Menu text="Menu">
                 <MenuItem text="My profile" onAction="#goToMyProfile"/>
+                <MenuItem text="Show history" onAction="#showHistory"/>
                 <MenuItem text="Log out" onAction="#logOut"/>
             </Menu>
         </MenuBar>

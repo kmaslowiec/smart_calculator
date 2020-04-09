@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx"
+            fx:controller="org.example.controller.HistoryDisplayController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <top>
+        <VBox fx:id="dateBox" alignment="CENTER">
+            <padding>
+                <Insets top="25" bottom="25"/>
+            </padding>
+            <Label text="choose date"/>
+            <TextField text="dd/mm/yy" onAction="#showHistory"/>
+        </VBox>
+    </top>
+    <center>
+        <HBox>
+            <TextArea fx:id="historyArea"/>
+        </HBox>
+    </center>
+</BorderPane>

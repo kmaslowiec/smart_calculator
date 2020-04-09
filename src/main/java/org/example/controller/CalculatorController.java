@@ -2,12 +2,17 @@ package org.example.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 import org.example.App;
 import org.example.entity.History;
 import org.example.model.InMemory;
@@ -16,12 +21,17 @@ import org.example.service.CalculatorService;
 import org.example.service.HistoryService;
 import org.example.service.impl.CalculatorServiceImpl;
 import org.example.service.impl.HistoryServiceImpl;
+import org.example.utils.MyStrings;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
 public class CalculatorController implements Initializable {
+
+    private static final Logger LOGGER = Logger.getLogger(CalculatorController.class.getName());
+    private static final Image ICON = new Image(App.class.getResourceAsStream(MyStrings.ICON_IMG));
 
     @FXML
     private Circle avatarCircle;
@@ -176,5 +186,28 @@ public class CalculatorController implements Initializable {
     private void initAvatarBox() {
         hello.setText("Hi " + memory.getUser().getName());
         blob.showAvatar(avatarCircle, memory, 40.0);
+    }
+
+    public void showHistory(ActionEvent actionEvent) {
+        setHistoryStage(actionEvent);
+
+    }
+
+    private void setHistoryStage(ActionEvent actionEvent) {
+        Parent root;
+        try {
+            root = FXMLLoader.load(App.class.getResource("history_display.fxml"));
+            Stage stage = new Stage();
+            stage.setX(100.00);
+            stage.getIcons().add(ICON);
+            stage.setResizable(false);
+            stage.setTitle("History");
+            stage.setScene(new Scene(root, 450, 450));
+            stage.getScene().getStylesheets().add
+                    (App.class.getResource("history_display.css").toExternalForm());
+            stage.show();
+        } catch (IOException e) {
+            LOGGER.info(e.getMessage());
+        }
     }
 }
