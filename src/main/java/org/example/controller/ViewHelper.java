@@ -72,11 +72,7 @@ public class ViewHelper {
         return calMemory.isResult();
     }
 
-    /*public void saveLastCalculation(String lastCalculation){
-        if(!lastCalculation.matches(MyRegex.IS_ASSIGNMENT)){
-            calMemory.setLastCalculation(lastCalculation);
-        }else{
-            System.out.println("cal not saved");
-        }
-    }*/
+    public boolean isDateValidFormat(String date) {
+        return date.matches("^(0[1-9]|[1-2][0-9]|3[0-1])/([0][0-9]|1[0-2])/\\d{2}$");
+    }
 }

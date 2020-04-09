@@ -18,7 +18,7 @@
                 <Insets top="25" bottom="25"/>
             </padding>
             <Label text="choose date"/>
-            <TextField text="dd/mm/yy" onAction="#showHistory"/>
+            <TextField fx:id="dateField" text="dd/mm/yy" onAction="#showHistory" alignment="CENTER"/>
         </VBox>
     </top>
     <center>
